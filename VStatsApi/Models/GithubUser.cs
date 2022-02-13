@@ -42,5 +42,8 @@ public class GithubUser
 
     [JsonPropertyName("updated_at")]
     public DateTime UpdatedAt { get; set; }
+    
+    [JsonPropertyName("avatar_url")]
+    public string AvatarURL { get; set; }
 
 }

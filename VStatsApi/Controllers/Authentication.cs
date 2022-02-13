@@ -89,8 +89,18 @@ Copy and paste the following code: <br>
 
         var user = await GetUser(sess.AccessToken);
         var token = new JwtSecurityTokenHandler().WriteToken(CreateJwt(user, sess.AccessToken));
-
+        
         _context.AuthSessions.Remove(sess);
+
+        _context.Users.Update(new User
+        {
+            ID = user.Id,
+            Login = user.Login,
+            Name = user.Name,
+            AvatarURL = user.AvatarURL,
+        });
+        
+
         await _context.SaveChangesAsync();
 
         return new LoginResult
