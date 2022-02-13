@@ -24,6 +24,19 @@ public class StatsController : Controller
             .ToListAsync();
     }
 
+    [HttpPost("project")]
+    public async Task<Project> CreateProject()
+    {
+        var p = new Project
+        {
+            UserID = int.Parse(User.FindFirstValue(ClaimTypes.NameIdentifier))
+        };
+        _context.Projects.Add(p);
+        await _context.SaveChangesAsync();
+        return p;
+    }
+    
+
     [HttpPost("")]
     public async Task<Stat> PostStats(Stat stat)
     {

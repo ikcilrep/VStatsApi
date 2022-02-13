@@ -1,6 +1,7 @@
 ﻿namespace VStatsApi.Models;
 
-public class User
+public class Project
 {
     public int ID { get; set; }
+    public int UserID { get; set; }
 }
