@@ -64,6 +64,7 @@ public class Authentication : Controller
             Code = sessCode,
             AccessToken = accessToken
         });
+        await _context.SaveChangesAsync();
 
         return new ContentResult
         {
