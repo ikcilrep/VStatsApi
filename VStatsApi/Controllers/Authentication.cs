@@ -11,10 +11,13 @@ using VStatsApi.Models;
 
 namespace VStatsApi.Controllers;
 
-public class GithubOauthResult
+public class LoginResult
 {
-    public string AccessToken { get; set; }
+    public GithubUser User { get; set; }
+    public string Token { get; set; }
 }
+
+
 
 [ApiController, Route("auth")]
 public class Authentication : Controller
@@ -36,7 +39,7 @@ public class Authentication : Controller
     }
 
     [HttpGet("callback")]
-    public async Task<string> Callback([FromQuery] string code)
+    public async Task<LoginResult> Callback([FromQuery] string code)
     {
         using var client = new HttpClient();
         var res = await client.PostAsync("https://github.com/login/oauth/access_token", new FormUrlEncodedContent(
@@ -54,8 +57,13 @@ public class Authentication : Controller
         var data = HttpUtility.ParseQueryString(str);
         var accessToken = data["access_token"];
         var user = await GetUser(accessToken);
-        
-        return new JwtSecurityTokenHandler().WriteToken(CreateJwt(user, accessToken));
+
+        var token = new JwtSecurityTokenHandler().WriteToken(CreateJwt(user, accessToken));
+        return new LoginResult
+        {
+            Token = token,
+            User = user,
+        };
     }
 
     private JwtSecurityToken CreateJwt(GithubUser user, string accessToken)
