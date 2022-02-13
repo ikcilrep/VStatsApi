@@ -4,9 +4,9 @@ public class Stat
 {
     public int ID { get; set; }
     public int UserID { get; set; }
-    public User User { get; set; }
+    public User? User { get; set; }
     public int ProjectID { get; set; }
-    public Project Project { get; set; }
+    public Project? Project { get; set; }
     public string Language { get; set; }
     public DateTime CreatedAt { get; set; }
     
