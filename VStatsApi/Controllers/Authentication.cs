@@ -52,7 +52,7 @@ public class Authentication : Controller
             }));
         res.EnsureSuccessStatusCode();
         var str = await res.Content.ReadAsStringAsync();
-        Console.WriteLine(str);
+        // Console.WriteLine(str);
         
         var data = HttpUtility.ParseQueryString(str);
         var accessToken = data["access_token"];
