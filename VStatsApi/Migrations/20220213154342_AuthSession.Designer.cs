@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using VStatsApi;
@@ -11,9 +12,10 @@ using VStatsApi;
 namespace VStatsApi.Migrations
 {
     [DbContext(typeof(VStatsContext))]
-    partial class VStatsContextModelSnapshot : ModelSnapshot
+    [Migration("20220213154342_AuthSession")]
+    partial class AuthSession
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
