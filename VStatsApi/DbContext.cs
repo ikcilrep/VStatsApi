@@ -7,7 +7,9 @@ namespace VStatsApi;
 public class VStatsContext : DbContext
 {
     public DbSet<User> Users { get; set; }
+    public DbSet<Stat> Stats { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseNpgsql(Configuration.GetConnectionString("VStatsContext"));
+    public VStatsContext(DbContextOptions<VStatsContext> options) : base(options)        
+    {        
+    }
 }
