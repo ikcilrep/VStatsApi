@@ -92,14 +92,23 @@ Copy and paste the following code: <br>
         
         _context.AuthSessions.Remove(sess);
 
-        _context.Users.Update(new User
+        var check = await _context.Users.FirstOrDefaultAsync(x => x.ID == user.Id);
+        if (check == null)
         {
-            ID = user.Id,
-            Login = user.Login,
-            Name = user.Name,
-            AvatarURL = user.AvatarURL,
-        });
-        
+            _context.Users.Add(new User
+            {
+                ID = user.Id,
+                Login = user.Login,
+                Name = user.Name,
+                AvatarURL = user.AvatarURL,
+            });
+        }
+        else
+        {
+            check.Name = user.Name;
+            check.Login = user.Login;
+            check.AvatarURL = user.AvatarURL;
+        }
 
         await _context.SaveChangesAsync();
 
