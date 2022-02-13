@@ -43,7 +43,7 @@ public class StatsController : Controller
 	group by ""UserID""
     order by ""LinesOfCode"" desc
     limit {1}
-", language, limit).ToListAsync();
+", language, limit).Include(x => x.User).ToListAsync();
         return query;
     }
 
